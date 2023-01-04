@@ -15,13 +15,21 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.views.generic import TemplateView
-from django.urls import path,include
-import vueProj.diyurls
+from django.urls import path, include, re_path
+from vue import views
+import vue.diyurls
 import VueDjango.urls
 
 urlpatterns = [
     #path('admin/', admin.site.urls),
-    path(r'^admin/', admin.site.urls),
-    path(r'^api/', include(vueProj.diyurls)),  # restful接口
-    path(r'^$', TemplateView.as_view(template_name="index.html")),
+    re_path(r'admin/', admin.site.urls),
+    re_path(r'api/', include('vue.diyurls')),  # restful接口
+    # path('api/logout/',LogOutView.as_view()),
+    # path('api/add_book$',views.add_book),
+    # path('api/show_books$', views.show_books),
+
+    path(r'$', TemplateView.as_view(template_name="index.html")),
+
+    # path('admin/', admin.site.urls),
+    # re_path('^.*article/', include('article.urls'))
 ]
