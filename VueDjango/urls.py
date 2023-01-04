@@ -14,8 +14,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.views.generic import TemplateView
+from django.urls import path,include
+import vueProj.diyurls
+import VueDjango.urls
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    #path('admin/', admin.site.urls),
+    path(r'^admin/', admin.site.urls),
+    path(r'^api/', include(vueProj.diyurls)),  # restful接口
+    path(r'^$', TemplateView.as_view(template_name="index.html")),
 ]
